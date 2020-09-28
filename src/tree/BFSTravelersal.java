@@ -6,11 +6,10 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * descrition：
+ * descrition：广度优先
  *
  * @author: Tianqi Cui
  * @create: 2018/12/13 19:36
- * @company: www.ideabinder.com
  */
 public class BFSTravelersal {
 

@@ -3,11 +3,10 @@ package tree;
 import java.util.Stack;
 
 /**
- * descrition：
+ * descrition：深度优先
  *
  * @author: Tianqi Cui
  * @create: 2018/12/13 19:08
- * @company: www.ideabinder.com
  */
 public class DFSTravelersal {
 

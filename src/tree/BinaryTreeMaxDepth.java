@@ -6,11 +6,10 @@ import java.util.LinkedList;
 import java.util.Queue;
 
 /**
- * descrition：
+ * descrition： 最大深度
  *
  * @author: Tianqi Cui
  * @create: 2018/12/13 18:01
- * @company: www.ideabinder.com
  */
 public class BinaryTreeMaxDepth {
 
