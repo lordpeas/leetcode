@@ -64,9 +64,11 @@ public class Codec {
     }
 
     public static void main(String[] args) {
-        String str = "1,2";
+        TreeNode node = new TreeNode(2);
+        node.left = new TreeNode(1);
+
         Codec codec =  new Codec();
-        TreeNode treeNode = codec.deserialize(str);
-        System.out.println(treeNode);
+        String serialize = codec.serialize(node);
+        System.out.println(serialize);
     }
 }
