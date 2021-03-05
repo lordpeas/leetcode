@@ -28,10 +28,19 @@ public class DailyTemperatures {
             while (!s.isEmpty()&& nums[s.getFirst()]<=nums[i]){
                 s.pop();
             }
-            res[i] = s.isEmpty()?-1:s.getFirst()-i;
+            res[i] = s.isEmpty()?0:s.getFirst()-i;
             //索引入栈 而不是元素
             s.push(i);
         }
         return res;
+    }
+
+
+    public static void main(String[] args) {
+        DailyTemperatures temperatures = new DailyTemperatures();
+        int[] res = temperatures.dailyTemperatures(new int[]{73, 74, 75, 71, 69, 76});
+        for (int i = 0; i < res.length; i++) {
+            System.out.println(res[i]);
+        }
     }
 }
