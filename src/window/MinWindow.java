@@ -45,6 +45,7 @@ public class MinWindow {
                 }
 
                 char d = s.charAt(left);
+                left++;
                 if (need.get(d) != null) {
                     if (window.get(d).equals(need.get(d))) {
                         valid--;
