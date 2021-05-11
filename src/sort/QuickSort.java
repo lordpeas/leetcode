@@ -4,6 +4,11 @@ import jdk.nashorn.internal.objects.NativeUint8Array;
 
 public class QuickSort {
 
+    public int findKthLargest(int[] nums, int k) {
+        sort(nums);
+        return nums[nums.length-k];
+    }
+
     public void sort(int[] nums) {
         sort(nums, 0, nums.length - 1);
     }
@@ -21,11 +26,11 @@ public class QuickSort {
         int pivot = nums[lo];
         int i = lo, j = hi + 1;
         while (true) {
-            while (nums[++i] > pivot) {
+            while (nums[++i] < pivot) {
                 if(i==hi) break;
             }
 
-            while (nums[--j]<pivot){
+            while (nums[--j] > pivot){
                 if (j==lo) break;
             }
             if(i>=j) break;
@@ -45,10 +50,8 @@ public class QuickSort {
     public static void main(String[] args) {
         QuickSort quickSort = new QuickSort();
        int[] nums = new int[]{4,1,6,3,2,5};
-       quickSort.sort(nums);
-        for (int num : nums) {
-            System.out.println(num);
-        }
+        int kthLargest = quickSort.findKthLargest(nums, 2);
+        System.out.println(kthLargest);
 
     }
 }
