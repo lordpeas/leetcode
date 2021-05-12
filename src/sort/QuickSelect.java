@@ -1,5 +1,7 @@
 package sort;
 
+import java.util.PriorityQueue;
+
 public class QuickSelect {
 
     /**
@@ -23,5 +25,16 @@ public class QuickSelect {
         }
 
         return -1;
+    }
+
+    public int findKthLargest1(int[] nums, int k) {
+        PriorityQueue<Integer> queue =new PriorityQueue<>();
+        for (int num : nums) {
+            queue.offer(num);
+            if (queue.size()>k){
+                queue.poll();
+            }
+        }
+        return queue.peek();
     }
 }
