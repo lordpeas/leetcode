@@ -1,83 +1,74 @@
 package tree;
 
-import java.util.Deque;
 import java.util.LinkedList;
 import java.util.Queue;
 
-/**
- * Description: leetcode
- * Created by : Tianqi Cui
- * Create Date: 2021年1月31日 17:26
- */
 public class Codec {
+
     private String SEP = ",";
 
-    private String NULL = "#";
+    private String NULL = "null";
 
     // Encodes a tree to a single string.
     public String serialize(TreeNode root) {
+        if(root == null) return "";
         StringBuilder sb = new StringBuilder();
-        preOrder(root, sb);
-        return sb.substring(0,sb.lastIndexOf(SEP)).toString();
-    }
-
-    private void preOrder(TreeNode root, StringBuilder resBuilder) {
-        if (root == null) {
-            resBuilder.append(NULL).append(SEP);
-            return;
-        }
-
-        resBuilder.append(root.val).append(SEP);
-        preOrder(root.left, resBuilder);
-        preOrder(root.right, resBuilder);
-    }
-
-    //1,2,3,#,#,4,5
-    // Decodes your encoded data to tree.
-    public TreeNode deserialize(String data) {
-        String[] array = data.split(SEP);
-        LinkedList<String> nodes = new LinkedList<>();
-        for (String s : array) {
-            nodes.addLast(s);
-        }
-        return deserialize(nodes);
-    }
-
-    private TreeNode deserialize(LinkedList<String> nodes){
-        if(nodes.isEmpty()) return null;
-       String first = nodes.removeFirst();
-        if (NULL.equals(first)) return null;
-       TreeNode root = new TreeNode(Integer.parseInt(first));
-       root.left = deserialize(nodes);
-       root.right = deserialize(nodes);
-       return root;
-    }
-
-
-
-    String serialize1(TreeNode root) {
-        if (root == null) return "";
-        StringBuilder sb = new StringBuilder();
-        Queue<TreeNode> que = new LinkedList<>();
-        que.offer(root);
-        while (!que.isEmpty()){
-            TreeNode cur = que.poll();
-            if (cur==null){
+        Queue<TreeNode> queue = new LinkedList<>();
+        queue.offer(root);
+        while(!queue.isEmpty()){
+            TreeNode first = queue.poll();
+            if(first==null){
                 sb.append(NULL).append(SEP);
                 continue;
             }
-
-            sb.append(cur.val).append(SEP);
-            que.offer(cur.left);
-            que.offer(cur.right);
+            sb.append(first.val).append(SEP);
+            queue.offer(first.left);
+            queue.offer(first.right);
         }
-        return  sb.toString();
+        return sb.toString();
     }
 
+    // Decodes your encoded data to tree.
+    public TreeNode deserialize(String data) {
 
+        if (data.isEmpty()) return null;
+        String[] nodes = data.split(SEP);
+        // 第一个元素就是 root 的值
+        TreeNode root = new TreeNode(Integer.parseInt(nodes[0]));
 
-// Your Codec object will be instantiated and called as such:
-// Codec ser = new Codec();
-// Codec deser = new Codec();
-// TreeNode ans = deser.deserialize(ser.serialize(root));
+        // 队列 q 记录父节点，将 root 加入队列
+        Queue<TreeNode> q = new LinkedList<>();
+        q.offer(root);
+
+        for (int i = 1; i < nodes.length; ) {
+            // 队列中存的都是父节点
+            TreeNode parent = q.poll();
+            // 父节点对应的左侧子节点的值
+            String left = nodes[i++];
+            if (!left.equals(NULL)) {
+                parent.left = new TreeNode(Integer.parseInt(left));
+                q.offer(parent.left);
+            } else {
+                parent.left = null;
+            }
+            // 父节点对应的右侧子节点的值
+            String right = nodes[i++];
+            if (!right.equals(NULL)) {
+                parent.right = new TreeNode(Integer.parseInt(right));
+                q.offer(parent.right);
+            } else {
+                parent.right = null;
+            }
+        }
+        return root;
+    }
+
+    public static void main(String[] args) {
+        TreeNode node = new TreeNode(2);
+        node.left = new TreeNode(1);
+
+        Codec codec =  new Codec();
+        String serialize = codec.serialize(node);
+        System.out.println(serialize);
+    }
 }
