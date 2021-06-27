@@ -31,12 +31,12 @@ public class NQueen {
     public void backTrace(String[] board, int row) {
 
         printIndent(count++);
-        System.out.println("row:"+row);
+        System.out.println("row:" + row);
 
         if (row == board.length) {
-            res.add(Arrays.asList(board));
+            res.add(new ArrayList<>(Arrays.asList(board)));
             printIndent(--count);
-            System.out.println("row:"+row);
+            System.out.println("row:" + row);
             return;
         }
 
@@ -47,18 +47,18 @@ public class NQueen {
             }
 
             StringBuilder sb = new StringBuilder(board[row]);
-            sb.replace(col, col+1, "Q");
-            System.out.println("替换："+sb.toString());
+            sb.replace(col, col + 1, "Q");
+            System.out.println("替换：" + sb.toString());
             board[row] = sb.toString();
             backTrace(board, row + 1);
-            sb.replace(col, col+1, ".");
-            System.out.println("撤销："+sb.toString());
+            sb.replace(col, col + 1, ".");
+            System.out.println("撤销：" + sb.toString());
             board[row] = sb.toString();
         }
 
-        res.add(new ArrayList<>(Arrays.asList(board)));
-        printIndent(--count);
-        System.out.println("row:"+row);
+//        res.add(new ArrayList<>(Arrays.asList(board)));
+//        printIndent(--count);
+//        System.out.println("row:"+row);
     }
 
     private boolean isValid(String[] board, int row, int col) {
@@ -71,7 +71,7 @@ public class NQueen {
         }
 
         //判断左上
-        for (int i = row - 1, j = col - 1; i >= 0 && j >= 0 ; i--, j--) {
+        for (int i = row - 1, j = col - 1; i >= 0 && j >= 0; i--, j--) {
             String s = board[i];
             if (s.charAt(j) == ('Q')) {
                 return false;
@@ -100,7 +100,7 @@ public class NQueen {
 
     public static void main(String[] args) {
         NQueen nQueen = new NQueen();
-        List<List<String>> list = nQueen.solveNQueens(3);
+        List<List<String>> list = nQueen.solveNQueens(4);
         System.out.println(list);
     }
 }
