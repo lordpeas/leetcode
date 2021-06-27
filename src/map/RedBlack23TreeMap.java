@@ -1,6 +1,5 @@
 package map;
 
-import apple.laf.JRSUIUtils;
 
 import java.util.Objects;
 
