@@ -9,4 +9,12 @@ public interface Map<K, V> {
     void delete(K key);
 
     int size();
+
+    default boolean contains(K key) {
+        return get(key) != null;
+    }
+
+    default boolean isEmpty() {
+        return size() == 0;
+    }
 }
