@@ -196,14 +196,14 @@ public abstract class AbstractRBTreeMap<K extends Comparable<K>, V> implements S
         return max.key;
     }
 
-    private Node min(Node node){
+    public Node min(Node node){
         if(Objects.isNull(node.left)){
             return node;
         }
         return min(node.left);
     }
 
-    private Node max(Node node){
+    public  Node max(Node node){
         if(Objects.isNull(node.right)){
             return node;
         }
