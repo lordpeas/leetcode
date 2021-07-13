@@ -25,16 +25,8 @@ public class Solution {
         return pre;
     }
 
-    public static void main(String[] args) {
-        ListNode cur = new ListNode(1);
-        ListNode pre = new ListNode(-1);
-        ListNode next = new ListNode(2);
 
-        cur.next = pre;
-        pre = cur;
-        cur = next;
-        System.out.println(1);
-    }
+
 }
 
 //*Definition for singly-linked list.
